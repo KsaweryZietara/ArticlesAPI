@@ -14,7 +14,8 @@ builder.Services.AddScoped<IAppRepo, SqlAppRepo>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddStackExchangeRedisCache(options => {
-
+    options.Configuration = configuration["ConnectionStrings:RedisConnection"];
+    options.InstanceName = "RedisCache";
 });
 
 builder.Services.AddControllers();

@@ -1,6 +1,16 @@
+using ArticlesAPI.Api.Models;
+
 namespace ArticlesAPI.Api.Data{
 
     public interface IAppRepo{
-        Task<bool> SaveChangesAsync();
+        Task CreateArticleAsync(ArticleModel article);
+
+        ArticleModel? GetArticleById(int id);
+
+        IEnumerable<ArticleModel> GetMostPopular(int amount);
+
+        IEnumerable<ArticleModel> GetArticleByKeyWord(string keyWord);
+
+        Task GiveLikeAsync(int id);
     }
 }
