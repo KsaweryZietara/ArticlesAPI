@@ -11,6 +11,6 @@ namespace ArticlesAPI.Api.Data{
 
         IEnumerable<ArticleModel> GetArticleByKeyWord(string keyWord);
 
-        Task GiveLikeAsync(int id);
+        Task<ArticleModel?> GiveLikeAsync(int id);
     }
 }

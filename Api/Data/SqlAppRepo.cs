@@ -37,13 +37,17 @@ namespace ArticlesAPI.Api.Data{
             return articles;
         }   
 
-        public async Task GiveLikeAsync(int id){
+        public async Task<ArticleModel?> GiveLikeAsync(int id){
             var article = _context.Articles.FirstOrDefault(x => x.Id == id);
 
-            if(article != null){
-                article.Likes++;
-                await _context.SaveChangesAsync();
+            if(article == null){
+                return null;
             }
+
+            article.Likes++;
+            await _context.SaveChangesAsync();
+            
+            return article;
         }
     }
 }

@@ -39,8 +39,8 @@ namespace ArticlesAPI.Api.Controllers{
 
         //GET api/articles/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetArticleById([FromRoute]int id){
-            ArticleModel article = new ArticleModel();
+        public async Task<ActionResult> GetArticleByIdAsync([FromRoute]int id){
+            ArticleModel? article = new ArticleModel();
             
             var cacheArticle = await _cache.GetAsync(id.ToString());
             
@@ -88,7 +88,12 @@ namespace ArticlesAPI.Api.Controllers{
         //PUT api/articles/{id}
         [HttpPut("{id}")]
         public async Task<ActionResult> GiveLikeAsync([FromRoute]int id){
-            await _repo.GiveLikeAsync(id);
+            var article = await _repo.GiveLikeAsync(id);
+            
+            if(article == null){
+                return NotFound();
+            }
+            
             return NoContent();
         }
 
